@@ -7,6 +7,7 @@ use App\Http\Resources\CompanyResource;
 use Illuminate\Http\Request;
 use App\Http\Traits\ApiResponse;
 use App\Models\Company;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -64,4 +65,13 @@ class CompanyController extends Controller
         
         return $this->success('acompany successfully updated',$company) ;
     }
+
+    public function destroy(Company $company)
+    {
+        Storage::has($company->logo)? Storage::delete($company->logo):'';
+        $company->delete();
+        return $this->success(__('site.deleted_successfully'),[],204) ;
+    }
+
+
 }

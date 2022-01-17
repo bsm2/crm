@@ -25,7 +25,8 @@ class ContactPersonController extends Controller
                     ->orWhere('phone','LIKE','%'.$request->search.'%');
                     
         })->with(['company' => function($query) use ($request){
-            $query->where('name', 'like', '%'.$request->search.'%');
+            $query->where('name_en', 'like', '%'.$request->search.'%')
+                ->orWhere('name_ar','LIKE','%'.$request->search.'%');
         }])->latest()->paginate(10);
 
         return view('dashboard.contact_person.index',compact('contactPeople'));

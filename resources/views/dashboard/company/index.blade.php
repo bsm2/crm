@@ -51,7 +51,7 @@
                                         @foreach ($companies as $index=>$company)
                                             <tr> 
                                                 <td>{{$index+1}}</td>
-                                                <td>{{$company->name}}</td>
+                                                <td>{{$company['name_'.session('lang')]}}</td>
                                                 <td>{{$company->email}}</td>
                                                 <td>
                                                     @foreach ($company->contactPeople as $contactPerson)
@@ -63,13 +63,13 @@
                                                 
                                                 <td>
                                                     
-                                                    {{-- @if (auth()->user()->hasPermission('companies-update')) --}}
+                                                    @if (auth()->user()->isAdmin())
                                                         <a href="{{ route('dashboard.company.edit', $company->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                                    {{-- @else --}}
-                                                        {{-- <button  class="btn btn-info disabled"><i class="fa fa-trash"></i> @lang('site.edit')</button> --}}
-                                                    {{-- @endif --}}
+                                                    @else
+                                                        <button  class="btn btn-info disabled"><i class="fa fa-trash"></i> @lang('site.edit')</button>
+                                                    @endif
             
-                                                    {{-- @if (auth()->user()->hasPermission('companies-delete')) --}}
+                                                    @if (auth()->user()->isAdmin())
             
                                                         <form action="{{route('dashboard.company.destroy', $company->id)}}" method="post" style="display: inline-block">
                                                             
@@ -78,9 +78,9 @@
                                                             <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                                         </form><!-- end of form -->
                     
-                                                    {{-- @else --}}
-                                                        {{-- <button  class="btn btn-danger disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button> --}}
-                                                    {{-- @endif --}}
+                                                    @else
+                                                        <button  class="btn btn-danger disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                    @endif
                                                     
                                                 </td>
                                             </tr>

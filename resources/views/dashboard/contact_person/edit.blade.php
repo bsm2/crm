@@ -44,7 +44,7 @@
                                     <select name="company_id" class="form-control">
                                         <option value="">@lang('site.companies')</option>
                                         @foreach ($companies as $company)
-                                            <option name ="company_id" value="{{ $company->id }}" {{ $contactPerson->company_id == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
+                                            <option name ="company_id" value="{{ $company->id }}" {{ $contactPerson->company_id == $company->id ? 'selected' : '' }}>{{ $company['name_'.session('lang')] }}</option>
                                         @endforeach
                                     </select>
                         

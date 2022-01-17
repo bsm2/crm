@@ -20,7 +20,7 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<Throwable>>
      */
     use ApiResponse;
-    
+
     protected $dontReport = [
         //
     ];
@@ -68,7 +68,7 @@ class Handler extends ExceptionHandler
                     }
                 }
                 
-                return $this->failure('Unexpected exception, Try later');
+                //return $this->failure('Unexpected exception, Try later');
             }
 
         });

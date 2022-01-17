@@ -70,6 +70,6 @@ class ContactPersonController extends Controller
     public function destroy(ContactPerson $contactPerson)
     {
         $contactPerson->delete();
-        return $this->success(' contact successfully deleted',$contactPerson);
+        return $this->success(' contact successfully deleted',[],204);
     }
 }

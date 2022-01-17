@@ -59,12 +59,10 @@
 
         'ar' => [
             'name' => 'name in arabic',
-            'description' => 'الوصف بالغه العربيه',
         ],
 
         'en' => [
             'name' => 'name in english',
-            'description' => 'الوصف بالغه الانجليزيه',
         ],
     ]
 

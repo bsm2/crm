@@ -12,7 +12,8 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name_en',
+        'name_ar',
         'email',
         'logo',
         'website_url'

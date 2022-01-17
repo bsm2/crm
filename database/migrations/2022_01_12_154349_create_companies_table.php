@@ -15,7 +15,8 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name_en');
+            $table->string('name_ar');
             $table->string('email');
             $table->string('logo');
             $table->string('website_url');
@@ -23,6 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

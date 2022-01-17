@@ -22,8 +22,12 @@
                                 @method('PUT')
         
                                 <div class="form-group">
-                                    <label>@lang('site.name')</label>
-                                    <input type="text" name="name" class="form-control" value="{{ $company->name }}">
+                                    <label>@lang('site.en.name')</label>
+                                    <input type="text" name="name_en" class="form-control" value="{{ $company['name_en']}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>@lang('site.ar.name')</label>
+                                    <input type="text" name="name_ar" class="form-control" value="{{ $company['name_ar']}}">
                                 </div>
                                 <div class="form-group">
                                     <label>@lang('site.email')</label>

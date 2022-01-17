@@ -54,20 +54,20 @@
                                                 <td>{{$index+1}}</td>
                                                 <td>{{$contactPerson->first_name}}</td>
                                                 <td>{{$contactPerson->last_name}}</td>
-                                                <td>{{$contactPerson->company->name}}</td>
+                                                <td>{{$contactPerson->company['name_'.session('lang')]}}</td>
                                                 <td>{{$contactPerson->email}}</td>
                                                 <td>{{$contactPerson->phone}}</td>
                                                 <td><a href="{{$contactPerson->linkedin_url}}">LinkedIn</a></td>
                                                 
                                                 <td>
                                                     
-                                                    {{-- @if (auth()->user()->hasPermission('contactPeople-update')) --}}
+                                                    @if (auth()->user()->isAdmin())
                                                         <a href="{{ route('dashboard.contactPerson.edit', $contactPerson->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                                    {{-- @else --}}
-                                                        {{-- <button  class="btn btn-info disabled"><i class="fa fa-trash"></i> @lang('site.edit')</button> --}}
-                                                    {{-- @endif --}}
+                                                    @else
+                                                        <button  class="btn btn-info disabled"><i class="fa fa-trash"></i> @lang('site.edit')</button>
+                                                    @endif
             
-                                                    {{-- @if (auth()->user()->hasPermission('contactPeople-delete')) --}}
+                                                    @if (auth()->user()->isAdmin())
             
                                                         <form action="{{route('dashboard.contactPerson.destroy', $contactPerson->id)}}" method="post" style="display: inline-block">
                                                             
@@ -76,9 +76,9 @@
                                                             <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                                         </form><!-- end of form -->
                     
-                                                    {{-- @else --}}
-                                                        {{-- <button  class="btn btn-danger disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button> --}}
-                                                    {{-- @endif --}}
+                                                    @else
+                                                        <button  class="btn btn-danger disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                    @endif
                                                     
                                                 </td>
                                             </tr>

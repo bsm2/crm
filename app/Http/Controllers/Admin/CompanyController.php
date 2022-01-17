@@ -10,6 +10,10 @@ use Illuminate\Validation\Rule;
 
 class CompanyController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('Admin')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +24,8 @@ class CompanyController extends Controller
 
         $companies= Company::when($request->search,function($q) use($request){
             
-            return $q->where('name','LIKE','%'.$request->search.'%')
+            return $q->where('name_en','LIKE','%'.$request->search.'%')
+                    ->orWhere('name_ar','LIKE','%'.$request->search.'%')
                     ->orWhere('email','LIKE','%'.$request->search.'%');
         })->latest()->paginate(10);
 
@@ -48,8 +53,8 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            
-            'name' => 'required',
+            'name_en' => 'required',
+            'name_ar' => 'required',
             'email' => 'required|unique:companies',
             'logo'=>'required|image|mimes:jpg,png,jpeg,gif|dimensions:min_width=100,min_height=100',
             'website_url'=>'url'
@@ -59,8 +64,9 @@ class CompanyController extends Controller
         if ($request->hasFile('logo')) {
             $data['logo']=$request->file('logo')->store('companies');
         }
+        //dd($data);
 
-        Company::create($data);
+        $company= Company::create($data);
         session()->flash('success',__('site.added_successfully'));
         return redirect()->route('dashboard.company.index');
     }
@@ -97,7 +103,8 @@ class CompanyController extends Controller
     public function update(Request $request, Company $company)
     {
         $data = $request->validate([
-            'name' => 'required',
+            'name_en' => 'required',
+            'name_ar' => 'required',
             'email' =>['required',Rule::unique('companies')->ignore($company->id)],
             'logo'=>'required|image|mimes:jpg,png,jpeg,gif|dimensions:min_width=100,min_height=100',
             'website_url'=>'url'
